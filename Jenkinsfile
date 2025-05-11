@@ -15,10 +15,14 @@ pipeline {
         stage('Checkout') {
             steps {
 <<<<<<< HEAD
+<<<<<<< HEAD
                  git url: 'https://github.com/Naveen-love/timeoff-management-application.git'
 =======
                  git url: 'git@github.com:Pravin131087/Timeoff.git'
 >>>>>>> 2e913b0839ded91ba72a51ea9a7474c96fe911a3
+=======
+                 git url: 'git@github.com:Pravin131087/Timeoff.git'
+>>>>>>> f8dc020b83a51a992a96ffcc3b51573ba9b42c01
             }
         }
 
