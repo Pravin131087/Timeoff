@@ -13,12 +13,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/Pravin131087/Timeoff.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
@@ -30,9 +24,13 @@ pipeline {
         stage('Login to ECR') {
             steps {
                 script {
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_CREDENTIALS_ID']]) {
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'AWS_CREDENTIALS_ID'
+                    ]]) {
                         sh """
-                            aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URL}
+                            aws ecr get-login-password --region ${AWS_REGION} | \
+                            docker login --username AWS --password-stdin ${ECR_URL}
                         """
                     }
                 }
@@ -50,7 +48,10 @@ pipeline {
         stage('Deploy to ECS') {
             steps {
                 script {
-                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_CREDENTIALS_ID']]) {
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'AWS_CREDENTIALS_ID'
+                    ]]) {
                         sh """
                             aws ecs update-service \
                               --cluster ${CLUSTER_NAME} \
