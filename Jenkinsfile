@@ -14,7 +14,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                 git url: 'git@github.com:Pravin131087/Timeoff.git'
+              stage('Checkout') {
+                steps {
+                   git url: 'https://github.com/Pravin131087/Timeoff.git'
+                      }
+       }
             }
         }
 
