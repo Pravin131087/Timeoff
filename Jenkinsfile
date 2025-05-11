@@ -11,12 +11,11 @@ pipeline {
         TASK_DEF_FAMILY = "ecr-task-def"
         CONTAINER_NAME = "ECS-Container"     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                 git url: 'git@github.com:Pravin131087/Timeoff.git'
-            }
-        }
+    stage('Checkout') {
+    steps {
+        git url: 'https://github.com/Pravin131087/Timeoff.git'
+    }
+}
 
         stage('Build Docker Image') {
             steps {
