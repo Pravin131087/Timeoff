@@ -9,13 +9,13 @@ pipeline {
         CLUSTER_NAME = "ecs-cluster"
         SERVICE_NAME = "ecr-task-def-service-8k1iumj9"
         TASK_DEF_FAMILY = "ecr-task-def"
-        CONTAINER_NAME = "ECS-Container"     }
-
-   stage('Checkout') {
-    steps {
-        git url: 'https://github.com/Pravin131087/Timeoff.git'
+        CONTAINER_NAME = "ECS-Container"
     }
-}
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/Pravin131087/Timeoff.git'
             }
         }
 
@@ -51,7 +51,6 @@ pipeline {
             steps {
                 script {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS_CREDENTIALS_ID']]) {
-                        // Get current task definition
                         sh """
                             aws ecs update-service \
                               --cluster ${CLUSTER_NAME} \
