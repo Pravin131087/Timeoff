@@ -1,5 +1,3 @@
-
-
 # FROM alpine:latest as dependencies
 FROM node:13-alpine3.11 as dependencies
 
